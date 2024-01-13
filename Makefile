@@ -16,7 +16,8 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 DEPENDENCIES_PATH = dependencies
 
-ifeq ($(OS),Windows_NT)
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Windows_NT)
     # If the OS is Windows
 	VULKAN_SDK_PATH = C:\VulkanSDK\1.3.268.0
 	VULKAN_SDK_LIBRARY_PATH = $(VULKAN_SDK_PATH)/lib
@@ -36,7 +37,11 @@ endif
 
 CXX = g++
 
-CPPFLAGS :=  -I$(VULKAN_SDK_PATH)/include -Iinclude -I$(GLFW_PATH)/include $(INC_FLAGS) -MMD -MP 
+CXXFLAGS := -I$(VULKAN_SDK_PATH)/include -Iinclude -I$(GLFW_PATH)/include $(INC_FLAGS) -MMD -MP
+
+LDFLAGS := -L$(GLFW_LIBRARY_PATH) -L$(VULKAN_SDK_LIBRARY_PATH)
+
+LDLIBS = -lvulkan-1.lib -lglfw3.lib
 
 RM = rm
 
@@ -44,11 +49,11 @@ all : $(NAME)
 
 $(NAME)	:	$(OBJS)
 	@echo "Creating $(NAME)"
-	$(CXX) -fsanitize=address $(OBJS) -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(INC_FLAGS) -fsanitize=address -o $@ $(OBJS) $(LDFLAGS) $(LDLIBS)
 
 $(BUILD_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -e
 
 clean :
 	@$(RM) -rf $(BUILD_DIR)
