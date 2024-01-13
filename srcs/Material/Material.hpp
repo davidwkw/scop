@@ -16,6 +16,7 @@ namespace Scop
         RGB(float r, float g = 0, float b = 0) : red(r), green(g ? g : r), blue(b ? b : r) {}
     };
 
+    // https://paulbourke.net/dataformats/mtl/
     class Material
     {
         public:

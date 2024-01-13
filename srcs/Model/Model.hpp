@@ -29,15 +29,16 @@ namespace Scop
         std::vector<FaceData> face_data;
     };
 
+    // https://paulbourke.net/dataformats/obj/
     class Model
     {
         public:
-            std::string             model_name;
-            std::vector<Vertex>     vertices;
-            bool                    smooth_shading;
-            std::vector<Face>       faces;
-            std::string             material_filename;
-            std::string             material_name;
+            std::string             model_name; // o
+            std::vector<Vertex>     vertices; // v
+            bool                    smooth_shading; // s
+            std::vector<Face>       faces; // f
+            std::string             material_filename; // mtllib
+            std::string             material_name; // usemtl
     };
 }
 
