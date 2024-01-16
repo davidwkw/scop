@@ -17,4 +17,8 @@ namespace Scop
         stream >> result;
         return result;
     }
+
+    std::string ltrim_ws(std::string s);
+    std::string rtrim_ws(std::string s);
+    std::string trim_ws(std::string str);
 }
