@@ -7,20 +7,20 @@ namespace Scop
 
 Model::Model(const std::string &filename): model_name(), vertices(), smooth_shading(), faces(), material_filename(), material_name()
 {
-    parse_object_file(model_filename);
+    parse_object_file(filename);
 }
 
 Model::~Model(){}
 
-void Model::parse_object_file(const std::string& model_filename)
+void Model::parse_object_file(const std::string& filename)
 {
-    check_valid_extension(model_filename);
-    parse_obj_file_to_model_instance(model_filename);
+    check_valid_extension(filename);
+    parse_obj_file_to_instance(filename);
 }
 
-void Model::check_valid_extension(const std::string& model_filename)
+void Model::check_valid_extension(const std::string& filename)
 {
-    const std::string file_extension = get_file_extension(model_filename);
+    const std::string file_extension = get_file_extension(filename);
 
     if (file_extension.length() == 0)
     {
@@ -32,12 +32,12 @@ void Model::check_valid_extension(const std::string& model_filename)
     }
 }
 
-void Model::parse_file(const std::string& model_filename)
+void Model::parse_obj_file_to_instance(const std::string& filename)
 {
     std::ifstream   model_file_stream;
     std::string     line;
 
-    model_file_stream.open(model_filename);
+    model_file_stream.open(filename);
     if (!model_file_stream)
     {
         throw std::runtime_error("Unable to path given");

@@ -47,7 +47,7 @@ namespace Scop
         private:
             void parse_object_file(const std::string& model_filename);
             void check_valid_extension(const std::string& model_filename);
-            void parse_obj_file_to_model_instance(const std::string& model_filename);
+            void parse_obj_file_to_instance(const std::string& model_filename);
             void parse_file(const std::string &line);
             void parse_obj_file_line(const std::string &line);
             void parse_vertex(const std::vector<std::string> &line_tokens);
