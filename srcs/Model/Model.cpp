@@ -23,13 +23,9 @@ void Model::check_valid_extension(const std::string& filename)
     const std::string file_extension = get_file_extension(filename);
 
     if (file_extension.length() == 0)
-    {
         throw std::runtime_error("Missing extension");
-    }
     else if (file_extension != ".obj")
-    {
         throw std::runtime_error("Expecting .obj file");
-    }
 }
 
 void Model::parse_obj_file_to_instance(const std::string& filename)
@@ -39,9 +35,7 @@ void Model::parse_obj_file_to_instance(const std::string& filename)
 
     model_file_stream.open(filename);
     if (!model_file_stream)
-    {
-        throw std::runtime_error("Unable to path given");
-    }
+        throw std::runtime_error("Unable to open file at path given");
     while (std::getline(model_file_stream, line))
     {
         line = remove_comment(line);
