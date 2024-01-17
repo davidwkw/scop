@@ -3,6 +3,9 @@
 #include <algorithm> 
 #include <cctype>
 #include <locale>
+#include <sstream>
+#include <string>
+#include <vector>
 
 namespace Scop
 {
@@ -34,6 +37,26 @@ std::string trim_ws(std::string str)
     str = rtrim(str);
     str = ltrim(str);
     return str;
+}
+
+std::string remove_comment(const std::string &line)
+{
+    std::size_t comment_index = line.find_first_of('#');
+    if (comment_index != std::string::npos)
+        return line.substr(0, comment_index);
+    else
+        return line;
+}
+
+std::vector<std::string> tokenise_str(const std::string &line, char delim = ' ')
+{
+    std::stringstream           ss(line);
+    std::vector<std::string>    result;
+    std::string                 str;
+
+    while (std::getline(ss, str, delim))
+        result.push_back(str);
+    return result;
 }
 
 }

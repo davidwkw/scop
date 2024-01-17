@@ -1,11 +1,14 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <sstream>
 
 namespace Scop
 {
     std::string get_file_extension(const std::string& filename);
+    std::vector<std::string> tokenise_str(const std::string &line, char delim);
+    std::string remove_comment(const std::string &line);
 
     template <typename T>
     T string_to_type(const std::string str)
