@@ -1,11 +1,5 @@
 #include "utils.hpp"
-#include <filesystem>
-#include <algorithm> 
-#include <cctype>
-#include <locale>
-#include <sstream>
-#include <string>
-#include <vector>
+
 
 namespace Scop
 {
@@ -34,8 +28,8 @@ std::string rtrim_ws(std::string s)
 
 std::string trim_ws(std::string str)
 {
-    str = rtrim(str);
-    str = ltrim(str);
+    str = rtrim_ws(str);
+    str = ltrim_ws(str);
     return str;
 }
 

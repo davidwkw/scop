@@ -2,6 +2,10 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
+#include <algorithm> 
+#include <cctype>
+#include <locale>
 #include <sstream>
 
 namespace Scop
