@@ -1,6 +1,4 @@
-#include "../include/Model.hpp"
-#include <string>
-#include <vector>
+#include "Model.hpp"
 
 namespace Scop
 {
@@ -48,8 +46,8 @@ void Model::parse_obj_file_to_instance(const std::string& filename)
 
 void Model::parse_obj_file_line(const std::string &line)
 {
-    std::vector<std::string> line_tokens = tokenise_str(line);
-    if (vector.size() < 2)
+    std::vector<std::string> line_tokens = tokenise_str(line, ' ');
+    if (line_tokens.size() < 2)
         throw std::runtime_error("Misconfigured .obj file");
     if (line_tokens[0] == "v")
         parse_vertex(line_tokens);
@@ -67,31 +65,31 @@ void Model::parse_obj_file_line(const std::string &line)
 
 void Model::parse_vertex(const std::vector<std::string> &line_tokens)
 {
-    if (line_tokens < 4)
+    if (line_tokens.size() < 4)
         throw std::runtime_error("Invalied vertex format in .obj file");
     Vertex vertex;
 
     vertex.x = string_to_type<float>(line_tokens[1]);
     vertex.y = string_to_type<float>(line_tokens[2]);
     vertex.z = string_to_type<float>(line_tokens[3]);
-    if (line_tokens > 4)
+    if (line_tokens.size() > 4)
         vertex.w = string_to_type<float>(line_tokens[4]);
     vertices.push_back(vertex);
 }
 
 void Model::parse_face(const std::vector<std::string> &line_tokens)
 {
-    if (line_tokens < 4)
+    if (line_tokens.size() < 4)
         throw std::runtime_error("Face has to form a triangle at minimum in .obj file");
 
     Face face;
 
-    for (std::vector<std::string>::iterator it = line_tokens.begin(); it != line.end(); it++)
+    for (std::vector<std::string>::const_iterator cit = line_tokens.begin(); cit != line_tokens.end(); cit++)
     {
         std::vector<std::string>    tokens;
         FaceData                    face_data;
         
-        tokens = tokenise_str(*it);
+        tokens = tokenise_str(*cit, '/');
         switch (tokens.size())
         {
             case 3:

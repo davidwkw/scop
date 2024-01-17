@@ -5,6 +5,9 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <sstream>
+#include <fstream>
+#include "utils.hpp"
 
 namespace Scop
 {
@@ -14,6 +17,7 @@ namespace Scop
         float z;
         float w = 1.0f;
 
+        Vertex(): x(), y(), z(), w(1.0f) {}
         Vertex(float x, float y, float z, float w = 1.0f): x(x), y(y), z(z), w(w) {}
     };
 
@@ -22,6 +26,7 @@ namespace Scop
         int texture_vertex_index = 0;
         int vertex_normal_index = 0;
 
+        FaceData(): vertex_index(), texture_vertex_index(), vertex_normal_index() {}
         FaceData(int vertex_index, int texture_vertex_index = 0, int vertex_normal_index = 0): vertex_index(vertex_index), texture_vertex_index(texture_vertex_index), vertex_normal_index(vertex_normal_index) {}
     };
 
