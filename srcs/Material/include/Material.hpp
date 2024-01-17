@@ -17,7 +17,7 @@ namespace Scop
     };
 
     // https://paulbourke.net/dataformats/mtl/
-    struct Material
+    class Material
     {   
         public:
             std::string material_name; // if no newmtl name define in file it is invalid; NO BLANKS
