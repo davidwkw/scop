@@ -1,10 +1,9 @@
 #include "Material.hpp"
-#include <string>
 
 namespace Scop
 {
 
-Material::Material(const std::string &filename)
+Material::Material(const std::string &filename): material_name(), ambient_reflectivity(), diffuse_reflectivity(), specular_reflectivity(), specular_exponent(), illumination_model(), dissolve(), optical_density()
 {
     parse_material_file(filename);
 }
@@ -45,10 +44,10 @@ void Material::parse_mtl_file_to_instance(const std::string& filename)
     }
 }
 
-void Material::parse_obj_file_line(const std::string &line)
+void Material::parse_mtl_file_line(const std::string &line)
 {
-    std::vector<std::string> line_tokens = tokenise_str(line);
-    if (vector.size() < 2)
+    std::vector<std::string> line_tokens = tokenise_str(line, ' ');
+    if (line_tokens.size() < 2)
         throw std::runtime_error("Misconfigured .obj file");
     if (line_tokens[0] == "newmtl")
         material_name = line_tokens[1];

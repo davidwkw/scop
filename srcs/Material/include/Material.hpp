@@ -5,6 +5,9 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <sstream>
+#include <fstream>
+#include "utils.hpp"
 
 namespace Scop
 {
@@ -13,6 +16,7 @@ namespace Scop
         float green;
         float blue;
 
+        RGB(): red(), green(), blue(){}
         RGB(float r, float g = 0, float b = 0) : red(r), green(g ? g : r), blue(b ? b : r) {}
     };
 
@@ -37,7 +41,7 @@ namespace Scop
             void parse_material_file(const std::string &filename);
             void check_valid_extension(const std::string& filename);
             void parse_mtl_file_to_instance(const std::string& filename);
-            void parse_obj_file_line(const std::string &line);
+            void parse_mtl_file_line(const std::string &line);
             void parse_reflectivity(const std::vector<std::string> &line_tokens, RGB &reflectivity);
     };
 }
